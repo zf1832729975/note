@@ -4,11 +4,12 @@
 
 1. 初识化一个项目
 
-    ```text
-    npm init        ==> 之后会询问一下基本的信息
-
-    npm  init -y    ==> 这个命令不需要询问信息
-
+    ```shell
+    # 这个命令会询问一下基本的信息
+    npm init   
+    
+    # 这个命令快速生成一个项目，不需要询问信息
+    npm  init -y 
     ```
 
 2. 安装 webpack
@@ -19,6 +20,7 @@
     之后就会在项目的 `package.josn` 文件的 `devDependencies` 里面写入安装的依赖
 
     在 webpack 4.0 以后的版本中， 需要在额外的安装一个命令行工具 webpack-cli
+
     > npm i -D webpack-cli
 
 ### 安装 loadash 依赖
@@ -79,6 +81,7 @@ loader 让 webpack 能够去处理那些非 JavaScript 文件（webpack自身只
 用 `style-loader` 来动态的把 css 文件插入的index.html文件中，是通过脚本添加到index.html上的，不是直接再index.html里面添加
 
 1. 安装 css 和 style 模块解析的依赖 `style-loader` 和 `css-loader`
+
     > npm install --save-dev style-loader css-loader
 
 2. 添加 css 解析的 loader
