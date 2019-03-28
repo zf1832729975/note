@@ -1,0 +1,151 @@
+# iconfont svg 图标 在vue项目中的使用
+
+```shell
+src
+|---components/
+|	|---icon-svg/
+|			|---index.vue	
+|---incons/			
+	|---index.js
+	|---svg/
+|---main.js
+
+```
+
+## `incons/index.js`
+
+```js
+// incons/index.js
+/**
+ * 字体图标, 统一使用SVG Sprite矢量图标(http://www.iconfont.cn/）
+ *
+ * 使用:
+ *  1. 在阿里矢量图标站创建一个项目, 并添加图标(这一步非必须, 创建方便项目图标管理)
+ *  2-1. 添加icon, 选中新增的icon图标, 复制代码 -> 下载 -> SVG下载 -> 粘贴代码(重命名)
+ *  2-2. 添加icons, 下载图标库对应[iconfont.js]文件, 替换项目[./iconfont.js]文件
+ *  3. 组件模版中使用 [<icon-svg name="canyin"></icon-svg>]
+ *
+ * 注意:
+ *  1. 通过2-2 添加icons, getNameList方法无法返回对应数据
+ */
+import Vue from 'vue'
+import IconSvg from '@/components/icon-svg'
+import './iconfont.js'
+
+Vue.component('IconSvg', IconSvg)
+
+//  动态的引入 svg 文件
+// require.context(path, request, callback)
+const svgFiles = require.context('./svg', true, /\.svg$/)
+// [fd.svg, dfd.svg]
+const iconList = svgFiles.keys().map(item => svgFiles(item))
+
+export default {
+  // 获取图标icon-(*).svg名称列表, 例如[shouye, xitong, zhedie, ...]
+  getNameList () {
+    return iconList.map(item => item.default.id.split('-')[1])
+  }
+}
+
+```
+
+## `components/icon-svg/index.js`
+
+```vue
+
+<template>
+  <svg
+    :class="getClassName"
+    :width="width"
+    :height="height"
+    aria-hidden="true">
+    <use :xlink:href="getName"></use>
+  </svg>
+</template>
+
+<script>
+  export default {
+    name: 'icon-svg',
+    props: {
+      name: {
+        type: String,
+        required: true
+      },
+      className: {
+        type: String
+      },
+      width: {
+        type: String
+      },
+      height: {
+        type: String
+      }
+    },
+    computed: {
+      getName () {
+        return `#icon-${this.name}`
+      },
+      getClassName () {
+        return [
+          'icon-svg',
+          `icon-svg__${this.name}`,
+          this.className && /\S/.test(this.className) ? `${this.className}` : ''
+        ]
+      }
+    }
+  }
+</script>
+
+<style>
+  .icon-svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+</style>
+```
+
+## 在项目中使用
+
+如有一个 `icon-success.svg` 的图标文件, 在 name 中 填写 `success`
+
+```html
+
+ <icon-svg :name=success></icon-svg>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

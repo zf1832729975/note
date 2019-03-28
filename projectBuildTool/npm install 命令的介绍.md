@@ -1,5 +1,4 @@
-
-# npm 的基本使用
+# npm install 命令的介绍
 
 ## npm install 命令
 
@@ -20,14 +19,17 @@ common options: [-P|--save-prod|-D|--save-dev|-O|--save-optional]
                 [-E|--save-exact] [-B|--save-bundle] [--no-save] [--dry-run]
 
 ```
-
+### npm install xxx
+- 会把X包安装到node_modules目录中
+- 不会修改package.json
+- 之后运行npm install命令时，不会自动安装X
 ### -g
-
 全局安装
 
-### -D, --save-dev: Package will appear in your` dependencies`
-
-包将出现在依赖项中
+### -S， --save
+- 会把X包安装到node_modules目录中
+- 会在package.json的dependencies属性下添加X
+- 之后运行npm install命令时，会自动安装X到node_modules目录中
 
 ### -P, --save-prod: Package will appear in your` dependencies`
 

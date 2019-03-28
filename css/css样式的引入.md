@@ -12,7 +12,7 @@
 @import url(common.css);
 ```
 
-```index
+```html
 <!-- index.html -->
 <style type="text/css">
 @import url(index.css)
