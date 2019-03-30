@@ -25,6 +25,8 @@ var connection = mysql.createConnection({
   database : 'my_db'
 });
 
+
+
 // 2. 连接
 connection.connect();
  
