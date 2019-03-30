@@ -82,6 +82,8 @@ const kitty = new Cat({ name: 'Zildjian' });
 kitty.save().then(() => console.log('meow'));
 ```
 
+#### demo
+
 ```js
 const mongoose = require('mongoose')
 // 1. 连接
@@ -105,18 +107,72 @@ var blogSchema = new Schema({
 
 // 3. 文档结发布为模型
 /**
- * 第一个参数：传入一个大写名词单数来表示你的表名称，mongoose 会自动将大写名词字符串乘车 小写复数 User ==> users
+ * 第一个参数：传入一个大写名词单数来表示你的表名称
+ * mongoose 会自动将大写名词字符串变成小写复数 User ==> users
  * 第二个参数： 架构 userSchema
  */
 let User = mongoose.model('User', blogSchema)
 
+// 4. 使用构造函数, 新增数据
+var admin = new User({
+    // 。。。。
+})
+
+// 5. 持久化
+admin.save((err, ret) => {
+    if (err) {
+        console.lgo('err')
+    } else {
+        console.log('Success')
+        console.log(ret)
+    }
+})
 ```
 
+#### 查询
 
+```js
+// 查询所有
+User.find((err, ret) => {
+    if (err) {
+        
+    } else {
+        console.log(ret)
+    }
+})
 
+// 按条件查询
+User.find({
+    name: 'zs'	// 查询name为 'zs' 的数据
+}, (err, ret) => {})
 
+// 按条件查询，查询到第一个就返回
+User.findOne({
+    name: 'zs'，	// 查询name为 'zs' & sex 为 1 的数据
+    sex:1
+}, (err, ret) => {})
+```
 
+#### 删除
 
+```js
+User.remove({
+    name: 'zs'
+}, (err, ret) => {})
+
+```
+
+#### 更新
+
+3.X版本
+
+```js
+// findOneAndUpdate
+User.findByIdAndUpdate('id号', {
+    name: 'lisi'	// 更改内容
+}, (err, ret) => {})
+
+```
 
 
 
