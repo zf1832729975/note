@@ -134,11 +134,156 @@ adb connect 127.0.0.1:7555
 | tags            | Array  |          | 原生 View 增强，详见：[5+ View 控件](http://www.html5plus.org/doc/zh_cn/nativeobj.html#plus.nativeObj.ViewDrawTagStyles) |          |
 | searchInput     | Object |          | 原生导航栏上的搜索框样式，详见：[searchInput](https://uniapp.dcloud.io/collocation/pages?id=app-titlenview-searchinput) |          |
 
+## 路由跳转
+
+navigator
+
+#### [navigator](https://uniapp.dcloud.io/component/navigator?id=navigator)
+
+页面链接。
+
+**属性说明**
+
+| 属性名                 | 类型    | 默认值          | 说明                                                         | 平台支持度 |
+| :--------------------- | :------ | :-------------- | :----------------------------------------------------------- | :--------- |
+| url                    | String  |                 | 应用内的跳转链接，值为相对路径或绝对路径，如："../first/first"，"/pages/first/first"，注意不能加 `.vue` 后缀 |            |
+| open-type              | String  | navigate        | 跳转方式                                                     |            |
+| delta                  | Number  |                 | 当 open-type 为 'navigateBack' 时有效，表示回退的层数        |            |
+| animation-type         | String  | pop-in/out      | 当 open-type 为 navigateTo、navigateBack 时有效，窗口的显示/关闭动画效果，详见：[窗口动画](https://uniapp.dcloud.io/api/router?id=animation) | 5+App      |
+| animation-duration     | Number  | 300             | 当 open-type 为 navigateTo、navigateBack 时有效，窗口显示/关闭动画的持续时间。 | 5+App      |
+| hover-class            | String  | navigator-hover | 指定点击时的样式类，当hover-class="none"时，没有点击态效果   |            |
+| hover-stop-propagation | Boolean | false           | 指定是否阻止本节点的祖先节点出现点击态                       | 微信小程序 |
+| hover-start-time       | Number  | 50              | 按住后多久出现点击态，单位毫秒                               |            |
+| hover-stay-time        | Number  | 600             | 手指松开后点击态保留时间，单位毫秒                           |            |
+
+**open-type 有效值**
+
+| 值           | 说明                         | 平台支持度                                                   |
+| :----------- | :--------------------------- | :----------------------------------------------------------- |
+| navigate     | 对应 uni.navigateTo 的功能,  | 保留当前页面，跳转到应用内的某个页面，使用`uni.navigateBack`可以返回到原页面。 |
+| redirect     | 对应 uni.redirectTo 的功能   | 关闭当前页面，跳转到应用内的某个页面。                       |
+| switchTab    | 对应 uni.switchTab 的功能    | 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面。           |
+| reLaunch     | 对应 uni.reLaunch 的功能     | 关闭所有页面，打开到应用内的某个页面。                       |
+| navigateBack | 对应 uni.navigateBack 的功能 | 关闭当前页面，返回上一页面或多级页面。可通过 `getCurrentPages()` 获取当前的页面栈，决定需要返回几层。 |
+
+```js
+openView(path) {
+    uni.navigateTo({
+        url: path
+    })
+}
+```
+
+uni中还有用接口实现跳转的，类似于web开发中使用window.location.href
+uni.navigateTo	保留当前页面，跳转到应用内的某个页面，使用uni.navigateBack可以返回到原页面。
+uni.redirectTo	关闭当前页面，跳转到应用内的某个页面。
+uni.reLaunch	关闭所有页面，打开到应用内的某个页面。
+uni.switchTab	跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面。
+uni.navigateBack	关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层。
+
+**注：使用期间发现路由不能用下面导航栏的页面路径**
+
+## 网络：
+
+### 发起网络请求
+
+```js
+uni.request({
+    url: "http://jsonplaceholder.typicode.com/users",
+    method: "GET",	// 必须大写
+    data:	{ 			// 请求参数
+        id: 1
+    },
+    success: function (res) {	// 成功回调
+        console.log('response', res)
+    },
+    fail: function (err) {	// 失败回调
+        console.log(err)
+    }
+})
+```
 
 
 
+#### [uni.request(OBJECT)](https://uniapp.dcloud.io/api/request/request?id=request)
 
+发起网络请求。
 
+> 在各个小程序平台运行时，网络相关的 API 在使用前需要配置域名白名单。
+
+**OBJECT 参数说明**
+
+| 参数名       | 类型                      | 必填 | 默认值 | 说明                                               | 平台支持度         |
+| :----------- | :------------------------ | :--- | :----- | :------------------------------------------------- | :----------------- |
+| url          | String                    | 是   |        | 开发者服务器接口地址                               |                    |
+| data         | Object/String/ArrayBuffer | 否   |        | 请求的参数                                         |                    |
+| header       | Object                    | 否   |        | 设置请求的 header，header 中不能设置 Referer。     |                    |
+| method       | String                    | 否   | GET    | 有效值详见下方说明                                 |                    |
+| dataType     | String                    | 否   | json   | 如果设为 json，会尝试对返回的数据做一次 JSON.parse |                    |
+| responseType | String                    | 否   | text   | 设置响应的数据类型。合法值：text、arraybuffer      | 支付宝小程序不支持 |
+| success      | Function                  | 否   |        | 收到开发者服务成功返回的回调函数                   |                    |
+| fail         | Function                  | 否   |        | 接口调用失败的回调函数                             |                    |
+| complete     | Function                  | 否   |        | 接口调用结束的回调函数（调用成功、失败都会执行）   |                    |
+
+**method 有效值**
+
+必须大写，有效值在不同平台支持度不同。
+
+| method  | 5+App |  H5  | 微信小程序 | 支付宝小程序 | 百度小程序 | 头条小程序 |
+| :-----: | :---: | :--: | :--------: | :----------: | :--------: | :--------: |
+|   GET   |   √   |  √   |     √      |      √       |     √      |     √      |
+|  POST   |   √   |  √   |     √      |      √       |     √      |     √      |
+|   PUT   |   √   |  √   |     √      |      x       |     √      |     √      |
+| DELETE  |   √   |  √   |     √      |      x       |     √      |     x      |
+| CONNECT |   √   |  √   |     √      |      x       |     x      |     x      |
+|  HEAD   |   √   |  √   |     √      |      x       |     √      |     x      |
+| OPTIONS |   √   |  √   |     √      |      x       |     √      |     x      |
+|  TRACE  |   √   |  √   |     √      |      x       |     x      |     x      |
+
+**success 返回参数说明**
+
+| 参数       | 类型                      | 说明                                    |
+| :--------- | :------------------------ | :-------------------------------------- |
+| data       | Object/String/ArrayBuffer | 开发者服务器返回的数据                  |
+| statusCode | Number                    | 开发者服务器返回的 HTTP 状态码          |
+| header     | Object                    | 开发者服务器返回的 HTTP Response Header |
+
+**data 数据说明**
+
+最终发送给服务器的数据是 String 类型，如果传入的 data 不是 String 类型，会被转换成 String。转换规则如下：
+
+- 对于 `GET` 方法，会将数据转换为 query string。例如 `{ name: 'name', age: 18 }` 转换后的结果是 `name=name&age=18`。
+- 对于 `POST` 方法且 `header['content-type']` 为 `application/json` 的数据，会进行 JSON 序列化。
+- 对于 `POST` 方法且 `header['content-type']` 为 `application/x-www-form-urlencoded` 的数据，会将数据转换为 query string
+
+### 上传和下载
+
+#### uni.uploadFile(object)
+
+将本地资源上传到开发者服务器，客户端发起一个 `POST` 请求，其中 `content-type` 为 `multipart/form-data`。
+
+```js
+	uni.chooseImage({
+        success: (chooseImageRes) => {
+            const tempFilePaths = chooseImageRes.tempFilePaths;
+            uni.uploadFile({	// 三个必填
+                url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
+                filePath: tempFilePaths[0], // 必填 要上传的文件资源路径
+                name: 'file',	// 必填 文件对应的 key , 开发者在服务器端通过这个 key 可以获取到文件二进制内容
+                formData: {
+                    'user': 'test'
+                },
+                success: (uploadFileRes) => {
+                    console.log(uploadFileRes.data);
+                }
+            });
+        }
+    });
+```
+
+#### uni.downloadFile（object）
+
+下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径。
 
 
 
