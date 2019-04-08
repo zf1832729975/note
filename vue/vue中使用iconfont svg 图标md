@@ -4,7 +4,7 @@
 src
 |---components/
 |	|---icon-svg/
-|			|---index.vue	
+|		|---index.vue	
 |---incons/			
 	|---index.js
 	|---svg/

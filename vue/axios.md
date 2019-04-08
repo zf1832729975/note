@@ -1,4 +1,4 @@
-# xios的基本使用
+# axios的基本使用
 
 ## 安装
 
@@ -34,7 +34,7 @@ axios.delete(url[, config])	# 删除
 axios.head(url[, config])   # 
 axios.options(url[, config])#
 axios.post(url[, data[, config]])	
-axios.put(url[, data[, config]])  	# 编辑 修改
+axios.put(url[, data[, config]])  	# 编辑 修改 用这个
 axios.patch(url[, data[, config]])  # 修改
 ```
 

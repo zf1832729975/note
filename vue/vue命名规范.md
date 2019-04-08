@@ -2,11 +2,11 @@
 
 #### 好例子
 
-单文件组件，就是vue中的 `.vue` 文件
+**单文件组件**，就是vue中的 `.vue` 文件
 
-字符串模板，是写在组件的 template 里面的
+**字符串模板**，是写在组件的 template 里面的
 
-DOM 模板， 就是直接写在 HTML 中的， 如写在 `<template id=my-component""></template>` 之间的代码， 通过 组件的里的 `template` 属性指定 , `template: '#my-component'`
+**DOM 模板**， 就是直接写在 HTML 中的， 如写在 html文件中的 template （`<template id=my-component""></template>` ）之间的代码， 通过 组件的里的 `template` 属性指定 , `template: '#my-component'`
 
 ```html
 <!-- 在单文件组件、字符串模板和 JSX 中 -->
