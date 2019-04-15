@@ -1,5 +1,7 @@
 # Git Pull Failed:You have not concluded your merge.Exiting because of unfinished merge
 
+## 
+
 **一：git命令在提交代码前，没有pull拉最新的代码，因此再次提交出现了冲突。**
 
 error: You have not concluded your merge (MERGE_HEAD exists).
