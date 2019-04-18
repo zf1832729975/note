@@ -63,6 +63,73 @@ adb connect 127.0.0.1:7555
 | mp-alipay | 支付宝小程序 |
 | mp-baidu  |  百度小程序  |
 
+## 框架简介
+
+## 生命周期
+
+### 应用生命周期
+
+- 应用生命周期仅可在`App.vue`中监听，在其它页面监听无效。
+
+- `onLaunch`: 初始化完成时触发，全局只触发一次
+  - launch: 发射
+- `onShow`:  当 app 启动， 或从后台切换到前台显示
+- `onHide`:  前台切换都后台
+
+### 页面生命周期
+
+- `onLoad`: 页面加载时，有一个参数，是一个对象，其参数是上一个页面传递给这个页面的数据，不管页面卸载没有，重新进入页面会重新执行该方法
+
+  ```js
+  // 上一个页面
+  uni.navigateT0({url: 'https://api.test.com?user=zhou'})
+  
+  之后会把 {user: zhou} 传递给 onLoad()
+  ```
+
+- `onShow`: 监听页面显示， 只要页面没有卸载，之后重新进入页面不会执行，页面已经卸载了再进入会执行
+
+- `onReady`: 监听页面初次渲染完成， 执行一次，页面没有卸载重新进入该页面不会执行该方法
+- `onHide`: 监听页面隐藏
+- `onUnload`: 监听页面卸载
+  - 根据 `v-if`来显示与隐藏页面不会执行该方法
+- `onPullDownRefresh`: 监听用户下拉动作，一般用于下拉刷新
+- `onReachBottom`: 页面上拉 触底事件的处理函数
+  - reach /ri:tS/：到达
+- `onTabItemTap`: 点击 tab 时触发， 参数为 object
+  - 属性
+  - `index`: 被点击tabItem的序号，从0开始
+  - `pagePath`： 被点击tabItem的页面路径
+  - `text`：被点击tabItem的按钮文字
+- `onShareAppMessage`: 用户点击右上角的分享按钮
+- `onPageScroll`: 监听页面滚动，参数为object
+  - 属性 `scrollTop`: 页面在垂直方向已滚动的距离（px)
+
+## 路由
+
+`uni-app`路由全部交给框架统一管理，开发者需要在[pages.json](https://uniapp.dcloud.io/collocation/pages?id=pages)里配置每个路由页面的路径及页面样式，不支持 `Vue Router`。
+
+`uni-app` 有两种路由跳转方式：使用[navigator](https://uniapp.dcloud.io/component/navigator)（导航）组件跳转、调用[API](https://uniapp.dcloud.io/api/router)（路由）跳转。
+
+### `getCurrentPages()`
+
+用于获取当前页面栈的实例，以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面。
+
+**注意：** `getCurrentPages()`仅用于展示页面栈的情况，请勿修改页面栈，以免造成页面状态错误。
+
+```js
+let page = getCurrentPages()
+// 获取当前页面的路由
+page.route
+
+// 获取当前页面的webview对象实例 5+App
+page.$getAppWebview()
+```
+
+
+
+
+
 ## pages.json 
 
 `pages.json` 文件用来对 uni-app 进行全局配置，决定页面文件的路径、窗口表现、设置多 tab 等。
