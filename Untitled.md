@@ -1,0 +1,8 @@
+# linux
+
+```shell
+$ vim # sdfksdf
+```
+
+
+
