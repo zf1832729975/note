@@ -24,17 +24,47 @@ git remote set-url --add origin https://github.com/zf1832729975/utils.git
 git push origin --all
 ```
 
+**之前的**
 
+```shell
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://gitee.com/zh8739/note.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
 
 ```
-打开.git/config，可以看到这样的配置：
 
+**之后的**
+
+```shell
+打开.git/config，可以看到这样的配置：
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
 [remote "origin"]
-    url = https://github.com/zkzong/spring-boot.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-    url = https://gitee.com/zkzong/spring-boot.git
+	url = https://gitee.com/zh8739/note.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = https://github.com/zf1832729975/note.git	 # 就添加了这句
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+
 
 ## 刚才的命令其实就是添加了这些配
+
 ```
 
 置。如果不想用命令行，可以直接编辑该文件，添加对应的url即可。
