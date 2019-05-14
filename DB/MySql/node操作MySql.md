@@ -212,7 +212,35 @@ connection.query(addSql,addSqlParams,function (err, result) {
 });
 ```
 
+#### 插入多条数据
 
+
+
+```js
+ var sql = "INSERT INTO customers (name, address) VALUES ?";
+  var values = [
+    ['John', 'Highway 71'],
+    ['Peter', 'Lowstreet 4'],
+    ['Amy', 'Apple st 652'],
+    ['Hannah', 'Mountain 21'],
+    ['Michael', 'Valley 345'],
+    ['Sandy', 'Ocean blvd 2'],
+    ['Betty', 'Green Grass 1'],
+    ['Richard', 'Sky st 331'],
+    ['Susan', 'One way 98'],
+    ['Vicky', 'Yellow Garden 2'],
+    ['Ben', 'Park Lane 38'],
+    ['William', 'Central st 954'],
+    ['Chuck', 'Main Road 989'],
+    ['Viola', 'Sideway 1633']
+  ];
+  con.query(sql, [values], function (err, result) {
+    if (err) throw err;
+    console.log("Number of records inserted: " + result.affectedRows);
+  });
+```
+
+ 
 
 #### 更新数据
 
@@ -248,6 +276,21 @@ connection.query(delSql,function (err, result) {
        console.log('DELETE affectedRows',result.affectedRows);
        console.log('-----------------------------------------------------------------\n\n');  
 });
+```
+
+## in语句
+
+in语句， `in(1, 2, 3)` ==> `'SQL WHERE id in(?)', [[1, 2, 3]], `
+
+```js
+arr = [1, 2, 3]
+db.query('DELETE FROM category WHERE id in(?)', [data], result => {
+            console.log('result', result)
+            res.json({
+                code: 0,
+                msg: '删除分类成功'
+            })
+        })
 ```
 
 

@@ -5,7 +5,7 @@
 在项目的根路径下创建文件 `veu.config.js`
 
 ```js
-modele.exports = {
+module.exports = {
     baseUrl: '/, //　更路径
     outputDir: 'dist',	// 构建输出目录
     assetsDir: 'assets', // 静态资源目录（js,css,img,fonts）
