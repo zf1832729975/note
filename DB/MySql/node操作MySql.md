@@ -284,7 +284,7 @@ in语句， `in(1, 2, 3)` ==> `'SQL WHERE id in(?)', [[1, 2, 3]], `
 
 ```js
 arr = [1, 2, 3]
-db.query('DELETE FROM category WHERE id in(?)', [data], result => {
+    db.query('DELETE FROM category WHERE id in(?)', [arr], result => {
             console.log('result', result)
             res.json({
                 code: 0,
@@ -295,7 +295,14 @@ db.query('DELETE FROM category WHERE id in(?)', [data], result => {
 
 
 
+#### 执行多条in语句
 
+```js
+db.query('select * from qst_single where categoryId in (?) and id = ?', [[22], 3], result => {
+                console.log('result', result)
+            })
+
+```
 
 
 
