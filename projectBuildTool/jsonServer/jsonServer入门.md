@@ -29,10 +29,10 @@ json-server -v
 
 ### 启动josn-server
 
-在当前文件路径下输入命令：
+在当前文件路径下输入命令：`json-server db.json`
 
 ```shell
-json-server db.json
+$ json-server db.json
 
   \{^_^}/ hi!
 

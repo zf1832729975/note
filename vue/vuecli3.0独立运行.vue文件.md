@@ -12,7 +12,7 @@
 
 
 
-运行	`vue seve Hello.vue`
+运行	`vue serve Hello.vue`
 
 告诉我们需要安装 `npm install -g @vue/cli-global`
 
