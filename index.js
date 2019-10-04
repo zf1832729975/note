@@ -32,13 +32,13 @@ var styles = {
 const cmd = {
   exec: command => {
     return new Promise((reslove, reject) => {
-      console.log(styles.blueBG, '$>>> ' + command)
+      console.log(styles.magentaBG, ' $  ' + command)
       exec(command, (err, stdout, stderr) => {
         if (err) {
           console.error(styles.red, err)
           reject(err)
         } else {
-          console.log(styles.yellow, '$>>> ' + command)
+          // console.log(styles.yellow, ' $  ' + command)
           console.log(styles.green, stdout)
           reslove(stdout)
         }
@@ -49,8 +49,10 @@ const cmd = {
 
 var date = new Date().toLocaleString()
 
-cmd.exec(`git pull && git add . && git commit -m "${date}" && git push --all`).then(() => {
-  exec('psuse', (err, stdout, stderr) => {
-    console.log(styles.greenBG, 'DONE')
+cmd.exec(`git pull`)
+  .then(() => cmd.exec(`git add . && git commit -m "${date}"`))
+  .then(() => cmd.exec(`git push --all && pause`))
+  .then(() => {
+    console.log(style.greenBG, 'DONE')
   })
-})
+  .catch(() => {})
