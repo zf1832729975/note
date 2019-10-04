@@ -53,7 +53,7 @@ cmd.exec(`git pull`)
   .then(() => cmd.exec(`git add . && git commit -m "${date}"`))
   .then(() => cmd.exec(`git push --all`))
   .then(() => {
-    console.log(style.greenBG, 'DONE')
+    console.log(styles.greenBG, 'DONE')
     return true
   })
   .then(() => cmd.exec(`pause`))
