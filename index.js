@@ -51,7 +51,8 @@ var date = new Date().toLocaleString()
 
 cmd.exec(`git pull`)
   .then(() => cmd.exec(`git add . && git commit -m "${date}"`))
-  .then(() => cmd.exec(`git push --all && pause`))
+  .then(() => cmd.exec(`git push --all`))
+  .then(() => cmd.exec(`pause`))
   .then(() => {
     console.log(style.greenBG, 'DONE')
   })
