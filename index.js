@@ -49,7 +49,7 @@ const cmd = {
 
 var date = new Date().toLocaleString()
 
-cmd.exec(`git pull`)
+cmd.exec(`start git pull`)
   .then(() => cmd.exec(`git add . && git commit -m "${date}"`))
   .then(() => cmd.exec(`git push --all`))
   .then(() => {
