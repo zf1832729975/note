@@ -56,5 +56,4 @@ cmd.exec(`git pull`)
     console.log(styles.greenBG, 'DONE')
     return true
   })
-  .then(() => cmd.exec(`pause`))
   .catch(() => {})
