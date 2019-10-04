@@ -35,7 +35,7 @@ const cmd = {
       if (!pause) {
         console.log(styles.magentaBG, '$ ' + command)
       }
-      exec(command, (err, stdout, stderr) => {
+      exec(command, { encoding: 'utf-8' }, (err, stdout, stderr) => {
         if (err) {
           console.error(styles.red, err)
           reject(err)
@@ -48,14 +48,28 @@ const cmd = {
   }
 }
 
-var date = new Date().toLocaleString()
+var works = [
+  '日',
+  '一',
+  '二',
+  '三',
+  '四',
+  '五',
+  '六'
+]
+
+var d = new Date()
+var work = '周' + works[d.getDay()]
+var date = d.toLocaleString()
+
+
 
 cmd.exec(`git pull`)
-  .then(() => cmd.exec(`git add . && git commit -m "${date}"`))
+  .then(() => cmd.exec(`git add . && git commit -m "${date}  ${work}"`))
   .then(() => cmd.exec(`git push --all`))
   .then(() => {
     console.log(styles.greenBG, 'DONE')
     return true
   })
   .then(() => cmd.exec(`pause`, true))
-  .catch(() => {})
+  .catch(() => { })
