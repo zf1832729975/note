@@ -49,6 +49,6 @@ const cmd = {
 
 var date = new Date().toLocaleString()
 
-cmd.exec(`git pull && git add . && git commit -m "${date}" && git push --all`).then(() => {
+cmd.exec(`git pull && git add . && git commit -m "${date}" && git push --all && pause`).then(() => {
   console.log(styles.greenBG, 'DONE')
 })
