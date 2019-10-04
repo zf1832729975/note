@@ -1,3 +1,7 @@
+---
+typora-root-url: ..\node_files
+---
+
 # javas SE 基础
 
 ### 前世今生
@@ -87,11 +91,11 @@ public class StaticHello {
 
 ## JAVA I/O 系统
 
-
+![1570152497496](/C:/Users/admin/AppData/Roaming/Typora/typora-user-images/1570152497496.png)
 
 ###### java.io.File 类
 
-
+![1570152412466](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\1570152412466.png)
 
  
 
