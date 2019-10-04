@@ -21,6 +21,9 @@ mysql> describe table_name
 # 6.查看端口号
 mysql> show global varibles like 'port';
 
+# 修改当前用户密码
+alter user user() identified by "123456";
+
 ```
 
 
