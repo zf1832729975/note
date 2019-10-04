@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "zfgit": "index.js"
+  },
   "keywords": [],
   "author": "zhoufei <1832729975@qq.com>",
   "license": "ISC"

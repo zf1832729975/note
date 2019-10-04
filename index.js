@@ -1,8 +1,18 @@
 #!/usr/bin/env node
 
 var exec = require('child_process').exec;
+var fs = require('fs')
 var path = require('path')
+var commit = process.argv[2] || ''
+console.log(process.argv);
 
+console.log(' process.cwd(): ', process.cwd()) // 获取node命令启动路径，你在那个目录运行的其值就是谁
+console.log(' __dirname: ', __dirname)  // 文件所在目录
+console.log(' process.execPath: ', process.execPath)  // 执行此js脚本所用的nodejs程序文件路径
+
+const reslove = file => {
+  return path.join(__dirname, file)
+}
 var styles = {
   'bold': '\x1B[1m%s\x1B[22m',
   'italic': '\x1B[3m%s\x1B[23m',
@@ -59,17 +69,26 @@ var works = [
 ]
 
 var d = new Date()
-var work = '周' + works[d.getDay()]
+var work = '星期' + works[d.getDay()]
 var date = d.toLocaleString()
 
+// var ora = require('ora')
+
+var content = `${commit} ${date}  ${work}`.trim()
 
 
-cmd.exec(`git pull`)
-  .then(() => cmd.exec(`git add . && git commit -m "${date}  ${work}"`))
-  .then(() => cmd.exec(`git push --all`))
-  .then(() => {
-    console.log(styles.greenBG, 'DONE')
-    return true
-  })
-  .then(() => cmd.exec(`pause`, true))
-  .catch(() => { })
+var create = file => {
+  var varsPath = reslove('vue.vue')
+  fs.writeFileSync(path.join('./index.vue'), fs.readFileSync(varsPath), 'utf-8')
+}
+
+create()
+// cmd.exec(`git pull`)
+//   .then(() => cmd.exec(`git add . && git commit -m "${content}"`))
+//   .then(() => cmd.exec(`git push --all`))
+//   .then(() => {
+//     console.log(styles.greenBG, 'DONE')
+//     return true
+//   })
+//   .then(() => cmd.exec(`pause`, true))
+//   .catch(() => { })
