@@ -1,4 +1,5 @@
 # 用 nodejs 操作 MySql 数据库
+[TOC]
 
 文档：在 npmjs 中搜索 mysql
 
@@ -19,10 +20,10 @@ var mysql      = require('mysql');
 
 // 1. 创建连接
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
+  host     : 'localhost', // 主机
+  user     : 'me',	// 用户名
+  password : 'secret',	// 密码
+  database : 'my_db' // 数据库名 
 });
 
 
@@ -40,6 +41,8 @@ connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
  // 4. 关闭`连接
 connection.end();	
 ```
+
+## 封装方法
 
 ```js
 //b)db.js代码：
