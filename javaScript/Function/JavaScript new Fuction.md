@@ -34,13 +34,15 @@ var add = new Function('x', 'y', 'return x+y')
 具体可以动态的用参数来调用其他函数
 
 ```js
+function capitalize(str) {
+    return str.chartAt(0).toUpperCase() + str.slice(1)
+}
 function markMutations (scopedStr, arr) {
   let res = {}
   arr.map(name => {
     // eslint-disable-next-line no-new-func
-    res[`update${name.charAt(0).toUpperCase() + name.slice(1)}`]
-     = new Function('state', 'val', 
-     `${scopedStr}.${name}.set(state, val); `)
+    res[`update${capitalize(name)}`]
+     = new Function('state', 'val',   `${scopedStr}.${name}.set(state, val)`)
   })
   return res
 }
